@@ -7,6 +7,7 @@ import { BsCartPlus,BsSearch } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Badge from "@mui/material/Badge";
+import { useSelector } from "react-redux";
 
 
 
@@ -15,19 +16,29 @@ import Badge from "@mui/material/Badge";
 
 const MainNavbar = ({ SearchTab, login , heart ,onSearch }) => {
   const navigate = useNavigate();
-  
+
+  // const Cartitem = useSelector((state)=> state.cartproduct)
+  // const [cart, setCart] = useState(Cartitem)
+  // let countitem =0 
+  // for ( const [key,value ] of Object.entries(Cartitem)){
+  //    countitem = countitem + Cartitem[key].value }
+
+
+const products = useSelector((state)=> state.allProducts)
+  console.log(products,"products");
   const handleChange =(e)=>{
  const query = e.target.value
-   onSearch(query)
+  
+
   }
   return (
     <div>
       <Navbar expand="lg">
-        <Container>
+        <Container style={{position:"sticky",top:"1rem"}}>
          
                       <Navbar.Brand
             style={{ color: "black", fontSize: "1.6rem",fontWeight:"500" }}
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/product")}
           >
             Dream shopping
           </Navbar.Brand>
@@ -89,7 +100,7 @@ const MainNavbar = ({ SearchTab, login , heart ,onSearch }) => {
                 </Button>
               }
               <div className="cart">
-                <Badge badgeContent={4} color="secondary">
+                <Badge badgeContent={"0"} color="secondary">
                   <BsCartPlus
                     size={"2.3em"}
                     color={"white"}

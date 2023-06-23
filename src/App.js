@@ -2,29 +2,31 @@ import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import About from './Pages/About';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Header from './Container/Header';
 
-import Home from './Pages/Home';
+
+// import Home from './Pages/Home';
 import Contact from "./Pages/Contact"
 import Product from "./Pages/Product"
 import Login from './Customercomponent/Login';
 import Signup from './Customercomponent/Signup';
 import ForgotPassword from './Customercomponent/ForgotPassword';
 import Cart from './Pages/cart';
-// import SingleProduct from './Pages/SingleProduct';
+import ProductDetail from './Pages/ProductDetail' 
+import { useSelector } from 'react-redux';
 
 function App() {
+
+const store = useSelector(state => state)
+
+console.log(store,"store");
+
   return (
-    // <div>
-    //   <Header/>
-    // <h1>Hello</h1>
-    // </div>
     
       <BrowserRouter>
       <Routes>
         <Route/>
-        <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/home" element={<Home/>}/>
+        <Route exact path="/" element={<Product/>}/>
+        {/* <Route exact path="/home" element={<Home/>}/> */}
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/ForgotPassword" element={<ForgotPassword/>}/>
@@ -32,7 +34,7 @@ function App() {
         <Route exact path="/contact" element={<Contact/>}/>
         <Route exact path="/product" element={<Product/>}/>
         <Route exact path="/cart" element={<Cart/>}/>
-        {/* <Route exact path="/singleproduct/:id" element={<SingleProduct/>}/> */}
+        <Route exact path="/productdetail/:productId" element={<ProductDetail/>}/>
       </Routes>
       </BrowserRouter>
 

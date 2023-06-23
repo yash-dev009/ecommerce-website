@@ -6,7 +6,6 @@ body{
 /************ main-navbar**************/
 .main-navbar{
   background-color:#272326;
-
   position: fixed;
   top:0;
 
@@ -14,6 +13,15 @@ body{
 .nav-main-container{
   justify-content: space-around;
 }
+
+.renderred{
+  width:90%;
+  margin: auto;
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
 .foot-icon{
 display: flex;
 flex-wrap: wrap;
@@ -150,13 +158,13 @@ margin-top: 130px;
   display: flex;
   flex-wrap: wrap;
   gap: .6rem;
-/* border: 2px solid red; */
+
 }
 .card-container-main{
   border: 2px solid black;
   height:auto;
   padding: 20px;
-  max-width:18rem;
+  max-width:24rem;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(90, 71, 71, 0.19);

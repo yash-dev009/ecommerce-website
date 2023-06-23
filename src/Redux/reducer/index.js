@@ -1,9 +1,12 @@
-// import { combineReducers } from "redux";
-// import { ProductReducer } from "./ProductReducer";
+import {combineReducers } from "redux";
+import {ProductReducer , cartReducer,favReducer} from "./ProductReducer";
 
 
 
-// const reducer = combineReducers({
-//     allProducts:ProductReducer,
-// })
-// export default reducer;
+
+const reducers = combineReducers({
+    allProducts:ProductReducer,
+    cartproduct:cartReducer,
+    favProduct:favReducer,
+})
+export default reducers;
