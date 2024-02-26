@@ -1,6 +1,6 @@
 body{
   width: 100%;
-  background: linear-gradient(#61dafb,#84fab0);
+  background: linear-gradient(75deg, #61dafb , #bbf8d1 );
 
 }
 /************ main-navbar**************/
@@ -18,7 +18,7 @@ body{
   width:90%;
   margin: auto;
   display: flex;
-  gap: 4rem;
+justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -109,6 +109,9 @@ background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244
 
 
 }
+.heading{
+margin-bottom: 131px;
+}
 .home-head-h2{
  
 margin-top: 130px;
@@ -134,11 +137,11 @@ margin-top: 130px;
 
 .searchbar{
   width: 20rem;
-  border-radius: 6px;
+  border-radius: 12px;
   background: #d7e2fa;
   border: transparent;
-  padding: 10px;
-  color: white;
+  padding: 0 10px 4px 12px;
+  height: 56px;
 }
 
 .searchIcon{
@@ -148,7 +151,7 @@ margin-top: 130px;
   font-size: 25px;
   right: 15px;
   color: #418fc0;
-  top: 8px;
+  top: 16px;
 }
 
 
@@ -167,6 +170,7 @@ margin-top: 130px;
   max-width:24rem;
   border-radius: 10px;
   background-color: #fff;
+  margin-bottom: 4rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(90, 71, 71, 0.19);
 } 
 
@@ -215,7 +219,8 @@ margin-top: 130px;
 /* ************ Category-button******* */
 
 .Category-button1{
-  height: 20vh;
+  margin-bottom: 3rem;
+  margin-top: 5rem;
   width: auto;
 
 }
@@ -253,4 +258,15 @@ margin-top: 130px;
 .Category-button-all:hover{
   background-color: #272326;
   color: #eee;
+}
+.loading{ 
+  text-align: center;
+
+}  
+.productdetail{
+  display: flex;
+  gap:60px ;margin-top:50px  ;
+   background-color: #c9eaf3 ;
+   border-radius: 21px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(90, 71, 71, 0.19);
 }

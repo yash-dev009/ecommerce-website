@@ -1,15 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainNavbar from "../components/MainNavbar";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { loginuser } from "../Redux/Action/ProductAction";
 
 function Login () {
-  const [Email, setEmail] = useState()
-  const[ Password ,setPassword]= useState()
+  const  store = useSelector((state) => state.registereduser)
+ 
+  
+  const [email, setEmail] = useState()
+  const[ password ,setPassword]= useState()
+  const[ check ,setCheck]= useState(store)
  const navigate= useNavigate()
+ const dispatch= useDispatch()
+
+
+
+
+ const handleSubmit =(e)=>{
+e.preventDefault()
+
+const filtered = store.find(k=> k.email === email && k.password == password)
+console.log(filtered,`filtered`);
+
+   if(!filtered){
+    toast.error(`You are required to be registered`)
+    return
+   }
+   else {
+    dispatch(loginuser(filtered))
+    navigate("/product")
+    toast.success(`Logging you in ...`)
+   }
+ }
 
   return (
     <div>
-      <MainNavbar/>
+  <MainNavbar />
       <section className="vh-80 vw-80">
         <div className="container py-5 h-100">
           <div className="row d-flex align-items-center justify-content-center h-100">
@@ -28,7 +56,7 @@ function Login () {
                   </label>
                   <input
                     type="email"
-                    value={Email}
+                    value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                     id="form1Example13"
                     className="form-control form-control-lg"
@@ -41,7 +69,7 @@ function Login () {
                     Password
                   </label>
                   <input
-                  value={Password}
+                  value={password}
                   onChange={(e)=>setPassword(e.target.value)}
                     type="password"
                     id="form1Example23"
@@ -60,7 +88,7 @@ function Login () {
                       
                     />
                     <label className="form-check-label" for="form1Example3">
-                      {" "}
+                     
                       Remember me{" "}
                     </label>
                   </div>
@@ -68,8 +96,8 @@ function Login () {
                 </div>
 
                 <button
-                  type="submit"
-                  className="btn btn-primary btn-lg btn-block">
+                  className="btn btn-primary btn-lg btn-block"
+                  onClick={handleSubmit}>
                   Sign in
                 </button>
 
@@ -91,7 +119,6 @@ function Login () {
                 <a
                   className="btn btn-primary btn-lg btn-block"
                   style={{border :"transparent", backgroundColor: "red"}}
-                 
                   role="button"
                 >
                   <i className="fab fa-twitter me-2"></i>Continue with Email

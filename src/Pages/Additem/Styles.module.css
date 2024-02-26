@@ -1,0 +1,26 @@
+.container{
+
+width: 80%;
+margin: auto;
+background-color: rgb(238, 245, 248);
+padding-top: 20px;
+border-radius: 10px;
+box-shadow: 1px 2px  2px #888888;
+
+}
+.subcontainer{
+   padding: 20px;
+
+}
+.input{
+    margin: 1rem;
+    border-radius: 15% 5%;
+    width: 20rem;
+}
+
+.submit{
+    text-align: center;
+}
+.submitbutton{
+    width: 18rem; margin: 2rem;
+}

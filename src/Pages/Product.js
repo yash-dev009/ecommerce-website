@@ -1,61 +1,57 @@
 import React from 'react'
 import MainNavbar from '../components/MainNavbar'
 import Cards from './Cards';
-import  { useEffect } from 'react'
+import  { useEffect, useState} from 'react'
 import Footer from '../components/Footer';
 import axios from 'axios';
 import Allbuttons from '../components/All buttons';
 import { useDispatch, useSelector  } from 'react-redux';
 import {setProducts} from "../Redux/Action/ProductAction"
+import { BsTextCenter } from 'react-icons/bs';
+import Circleloading from '../components/spiner';
+
 
 const Product = () => {
 
- const  store =useSelector((state) => state)
+ const  store = useSelector((state) => state)
+ const  isadmin = useSelector((state) => state.loginusers)
   const dispatch =  useDispatch()
 
-  // const [ProductPosts, setProductPosts] = useState([]);
-
-
+  const [loading, setLoading] = useState(false);
+ 
+ 
 
   const getMyPostData = async()=>{
+    setLoading(true)
     const response = await axios
     .get('https://fakestoreapi.com/products')
     .catch((err)=>{
         console.log("Err",err);
-       })       
-   dispatch(setProducts(response.data))
+       })   
+       setLoading(false)    
+   dispatch(setProducts(response.data.map((product,i) => ({...product,isCart:false}))))
+
   }
-  
-    useEffect(() => {
+    useEffect(()=>{
       getMyPostData()
     }, []);
  console.log(store,"store")
-  
 
+ console.log(isadmin,`isadmin`);
   return (
     <div>
-      <MainNavbar SearchTab heart login/>
+      {isadmin?.user=="user"?<MainNavbar SearchTab heart product/>:<MainNavbar SearchTab heart additem product/>} 
+     
 
       <Allbuttons/>
 
-      <div style={{height:"10vh"}}>
-
-</div>
-      
+   
       <div className=''>
-  <Cards/>
-      {/* {ProductPosts.map((post)=>{
-      return(
-        <Cards
-        key={post.id}
-        Heading={post.title}
-        Price={post.price}
-        Description={post.description}
-        Img={post.image}
-        Category={post.category}
-        />
-      )
-    })} */}
+
+      { loading ? <><h2 className='loading'>Wait a second
+      Loading...</h2> 
+      <div style={{display:"flex",justifyContent:"center", marginTop:"40px"}}><Circleloading/></div>
+      </> :<Cards/> }  
     </div>
     <div style={{height:"20vh"}}>
 

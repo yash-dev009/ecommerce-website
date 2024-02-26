@@ -9,7 +9,7 @@ export default function Contact() {
 <div>
 
 <section className="vh-80 vw-80">
-<MainNavbar  />
+<MainNavbar product />
   <div className="container py-5 h-100">
     <div className="row d-flex align-items-center justify-content-center h-100">
       <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
@@ -61,7 +61,6 @@ export default function Contact() {
                 
               />
               <label className="form-check-label" for="form1Example3">
-                {" "}
                 Send me a copy.{" "}
               </label>
             </div>

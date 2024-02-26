@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -14,14 +14,14 @@ import { useSelector } from "react-redux";
 
 
 
-const MainNavbar = ({ SearchTab, login , heart ,onSearch }) => {
+const MainNavbar = ({ SearchTab, login , heart ,onSearch ,additem ,product}) => {
   const navigate = useNavigate();
 
-  // const Cartitem = useSelector((state)=> state.cartproduct)
-  // const [cart, setCart] = useState(Cartitem)
-  // let countitem =0 
-  // for ( const [key,value ] of Object.entries(Cartitem)){
-  //    countitem = countitem + Cartitem[key].value }
+   const Cartitem = useSelector((state)=> state.cartproduct)
+   const [cart, setCart] = useState(Cartitem)
+   let countitem =0 
+   for ( const [key,value ] of Object.entries(Cartitem)){
+     countitem = countitem + Cartitem[key].value }
 
 
 const products = useSelector((state)=> state.allProducts)
@@ -53,12 +53,12 @@ const products = useSelector((state)=> state.allProducts)
               >
                 Home
               </Nav.Link>
-              <Nav.Link
+             {product && <Nav.Link
                 style={{ color: "white" }}
                 onClick={() => navigate("/product")}
               >
                 Products
-              </Nav.Link>
+              </Nav.Link>}
               <Nav.Link
                 style={{ color: "white" }}
                 onClick={() => navigate("/contact")}
@@ -72,8 +72,7 @@ const products = useSelector((state)=> state.allProducts)
 
 
               {SearchTab && (
-                <div
-                  style={{
+                <div style={{
                     marginRight: "20px",
                     position: "relative",
                     display: "flex",
@@ -81,12 +80,11 @@ const products = useSelector((state)=> state.allProducts)
                   }}
                 >
                   <input
-                  style={{color:"black"}}
                     placeholder="Search here"
                     className="searchbar"
                     onChange={handleChange}
                   />
-                  <BsSearch className="searchIcon"> </BsSearch>{" "}
+                  <BsSearch className="searchIcon"> </BsSearch>
                 </div>
               )}
 
@@ -99,14 +97,23 @@ const products = useSelector((state)=> state.allProducts)
                   Login
                 </Button>
               }
+              {additem &&
+              <Button
+                  variant="outline-success"
+                  onClick={() => navigate("/additem")}
+                  style={{ marginRight: "16px", width: "5rem" }}
+                >
+                  Add items
+                </Button>
+              }
               <div className="cart">
-                <Badge badgeContent={"0"} color="secondary">
+             
                   <BsCartPlus
                     size={"2.3em"}
                     color={"white"}
                     style={{ right: "-10px" }}
                     onClick={()=>{navigate("/cart")}}/>
-                </Badge>
+                
               </div>
             </Nav>
           </Navbar.Collapse>

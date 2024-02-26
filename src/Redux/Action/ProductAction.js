@@ -7,6 +7,12 @@ export const setProducts=(products)=>{
         payload: products,
     };
 };
+export const AddNewProduct=(product)=>{
+    return{
+        type: ActionTypes.ADD_NEW_PRODUCT,
+        payload: product,
+    };
+};
 
 export const favProducts=(product)=>{
     return{
@@ -27,8 +33,23 @@ export const AddToCart=(product)=>{
     };
 };
 export const RemoveFromCart=(product)=>{
+
     return{
         type: ActionTypes.REMOVE_CART_PRODUCTS,
         payload: product,
+    };
+};
+export const AddNewUser=(user)=>{
+
+    return{
+        type: ActionTypes.ADD_NEW_USER,
+        payload: user,
+    };
+};
+export const loginuser=(user)=>{
+
+    return{
+        type: ActionTypes.ADD_LOGIN_USER,
+        payload: user,
     };
 };

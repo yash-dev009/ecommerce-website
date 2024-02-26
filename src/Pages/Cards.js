@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import Modal from 'react-modal';
 // import {RxCross2} from "react-icons/rx";
 // import { useNavigate } from 'react-router-dom';
@@ -9,91 +9,67 @@ import { AddToCart, RemoveFromCart } from '../Redux/Action/ProductAction';
 
 
 
-// const customStyles = {
-//   content: {
-//     // justifyContent:"center" ,
-//    textAlign:"center",
-//     display:"flex",
-//     flexWrap:"wrap",
-//     //  top: '10%',
-//     //  left: '20%',
-//     //  transform: 'translate(-9%, 1%)',
-//   },
-// };
-
-
-
 const Cards = () => {
 
-const products = useSelector((state)=> state.allProducts.products)
+const products = useSelector((state)=> state.allProducts)
+const selectedprdt =  useSelector((state)=> state.cartproduct)
 const navigate = useNavigate()
+const dispatch = useDispatch()  
 
 
-const dispatch = useDispatch()
-const renderlist = products.map((product)=>{
-  
-  const {id , price, title ,description,image} = product 
+console.log(selectedprdt,"selectedprdt");
+console.log(products,"products");
 
-  return (
-    <div className="card-container-main" key={id} onClick={() => navigate(`/productdetail/${id}`)} >
 
-    <AiOutlineHeart size={"1.4rem"} marginLeft={"40px"} />  
-  <img className="card-img" src={image}  alt={title}/>
+const arrayTwoIds = new Set(selectedprdt?.map((el) => el.id));
+const arrayOneFiltered = products.filter((el) => !arrayTwoIds.has(el.id));
+const newArr = [...arrayOneFiltered,...selectedprdt]
 
-  <div className='card-container-sub'>
-   <h4 className='card-heading'>{title.substring(0,40)}</h4> 
+console.log(newArr,"newArr");
 
- <div className='cart-btn-div'>
+const result = newArr.reduce((unique, o) =>{
+  if(!unique.some(obj => obj.title === o.title)){
+    unique.push(o);
+  }
+  return unique;
+},[]);
+console.log(result, 'result');
 
- <p className="cart-btn" >Details{description.substring(0,80)}</p>
- <p className="price" onClick={(event) => {
-    event.stopPropagation()
-    dispatch(RemoveFromCart(product))
- }} > Price = $ {price}</p>
-<p className="cart-btn" onClick={(event) => {
-    event.stopPropagation()
-    dispatch(AddToCart(product))
- }}>Add to cart</p> 
-  <p className="cart-btn" style={{color:"blue"}}>Remove from cart</p>
- 
-</div>
-</div> 
-</div>
-  )
-
-})
-
-//   let subtitle;
-//   const [modalIsOpen, setIsOpen] = React.useState(false);
-
-// const Navigate = useNavigate()
-
-//   function afterOpenModal() {
-//     subtitle.style.color = '#f00';
-//   }
-
- 
   return (
     <div className='renderred' >
-        {renderlist}
-     
-    {/* <Modal
-      isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
-      onRequestClose={()=>{setIsOpen(false)}}
-      style={customStyles}
-      contentLabel="Example Modal"
-    >
-      
-    <RxCross2  onClick={()=>{setIsOpen(false)}} style={{marginLeft:" 95%", fontSize:"1.2rem"}} />
-    <div style={{display:"flex"}}>
+       {result.sort((a,b) => a.id - b.id).map((product)=>{
+  
+    const {id , price, title ,description,image,isCart}= product 
+  
+    return (
+      <div className="card-container-main" key={id} onClick={() => navigate(`/productdetail/${id}`)} >
+  
+      <AiOutlineHeart size={"1.4rem"} marginLeft={"40px"} />  
     <img className="card-img" src={image}  alt={title}/>
-    <div  style={{display:"flex", flexWrap:"wrap" ,border:"2px solid blue"}}>
-    <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{title}</h2>
-       <p>{description}</p>
-       <p className="cart-btn" style={{display:"inline-block" ,justifyContent:"center"}}>Add to cart</p>  </div>
-       </div>
-    </Modal> */}
+  
+    <div className='card-container-sub'>
+     <h4 className='card-heading'>{title.substring(0,40)}</h4> 
+  
+   <div className='cart-btn-div'>
+  
+   <p className="cart-btn" >Detail : {description.substring(0,80)}</p>
+   <p className="price"  > Price = $ {price}</p>
+   {!isCart ? <p className="cart-btn" onClick={(event) => {
+      event.stopPropagation()
+      dispatch(AddToCart({...product,isCart:true}))
+   }}>Add to cart</p>  :
+    <p className="cart-btn" onClick={(event) => {
+      event.stopPropagation()
+      dispatch(RemoveFromCart(product))
+   }}>Remove from cart</p>}
+  
+   
+  </div>
+  </div> 
+  </div>
+    )
+  })}
+
     </div>
   )
   

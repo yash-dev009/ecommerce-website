@@ -7,6 +7,7 @@ function FavItems() {
  
 
  const  favrender = products.map(item=>{
+  
   const {id , price, title ,description,image} = item
 
   return (
