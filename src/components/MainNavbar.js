@@ -28,8 +28,7 @@ const products = useSelector((state)=> state.allProducts)
   console.log(products,"products");
   const handleChange =(e)=>{
  const query = e.target.value
-  
-
+   console.log( countitem,"countitem")
   }
   return (
     <div>
